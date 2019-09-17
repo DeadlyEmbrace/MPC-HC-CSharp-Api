@@ -19,11 +19,14 @@ namespace MPC_HC.Test
 
         public CommandServiceIntergrationTest()
         {
-            _mediaPlayerConfig = new MediaPlayerConfig("http://localhost:13579",@"D:\Program Files (x86)\MPC-HC\mpc-hc.exe");
+            _mediaPlayerConfig = new MediaPlayerConfig("http://localhost:13579", @"C:\Program Files\MPC-HC\mpc-hc64.exe");
 //            _requestService = new RequestService(new HttpClient(), "http://localhost:13579", new LogService());
             _mpcHomeCinema = new MPCHomeCinema("http://localhost:13579");
             var x = AsyncHelpers.RunSync(InitMediaPlayer);
-            if(x.ResultCode == ResultCode.Fail) throw new Exception("Can't open media file.");
+            if (x.ResultCode == ResultCode.Fail)
+            {
+                throw new Exception("Can't open media file.");
+            }
         }
 
         private async Task<Result> InitMediaPlayer()
@@ -32,7 +35,7 @@ namespace MPC_HC.Test
             _mediaProcess = Process.Start(_mediaPlayerConfig.PathToMediaPlayerExecutable);
             await Task.Delay(1000);
             return await _mpcHomeCinema.OpenFileAsync(
-                "D:\\Downloads\\TorrentDay\\Downloads\\Gravity.Falls.S01-S02.720p.WEB-DL.AAC2.0.H.264-iT00NZ\\Gravity.Falls.S01.720p.WEB-DL.AAC2.0.H.264-iT00NZ\\Gravity.Falls.S01E01.Tourist.Trapped.720p.WEB-DL.AAC2.0.H264-Reaperza.mkv");
+                @"D:\Users\ralph\My Videos\AMV\[Winner of AKROSS Con 2009] Fynjy - Hell's Gate.mp4");
         }
 
         [Fact]
@@ -116,7 +119,7 @@ namespace MPC_HC.Test
         [Fact]
         public async void SetPostition()
         {
-            var res = await _mpcHomeCinema.SetPosition(new TimeSpan(0,11,23));
+            var res = await _mpcHomeCinema.SetPosition(new TimeSpan(0,1,23));
             Assert.True(res.ResultCode == ResultCode.Ok);
         }
 
