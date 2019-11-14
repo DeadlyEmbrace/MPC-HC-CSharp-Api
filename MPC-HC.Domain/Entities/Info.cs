@@ -20,6 +20,10 @@ public class Info
     public int ReloadTime { get; set; }
     public string Version { get; set; }
 
+    public int ApiVersion { get; set; }
+
+    public bool FullScreen { get; set; }
+
     public static State IntToState(int i)
     {
         switch (i)
