@@ -36,8 +36,8 @@ namespace MPC_HC.Domain.Helpers
                 ? 0 
                 : int.Parse(apiVersion.InnerText);
 
-            // These values are only available for API version > 1
-            if (info.ApiVersion > 1)
+            // These values are only available for API version >= 1
+            if (info.ApiVersion >= 1)
             {
                 info.FullScreen = bool.Parse(htmlDoc.GetElementbyId("fullscreen").InnerText);
             }
